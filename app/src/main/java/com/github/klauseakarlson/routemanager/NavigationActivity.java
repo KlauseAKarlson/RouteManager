@@ -1,8 +1,10 @@
 package com.github.klauseakarlson.routemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.TextViewCompat;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,8 +42,11 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         //any changes to behavior should override/replace this
         String destination=stop.getName()+"\n"+
                 stop.getStreet()+"\n"+
-                stop.getCity()+","+stop.getState();
+                stop.getCity()+", "+stop.getState();
         LAddress.setText(destination);
+
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(LAddress,12,
+                48,4, TypedValue.COMPLEX_UNIT_DIP);
     }
 
     @Override
