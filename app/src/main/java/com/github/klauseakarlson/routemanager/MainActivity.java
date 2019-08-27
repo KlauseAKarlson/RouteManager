@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Address a=_Route.get(position);
             String name =a.getName();
             Boolean active=a.getActive();
-            //Log.d("Main:RecycleView", "Bind: "+name+":"+active);//debug
             holder.Name.setText(name);
             holder.Selector.setChecked(active);
             holder.Position=position;

@@ -7,7 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
 
 import java.util.LinkedList;
 
@@ -50,10 +50,6 @@ public class Route{
         if(_DBReady) {
             SQLiteDatabase save=_Save.getReadableDatabase();
             //create cursor
-
-            String[] Collumns={CName,CStreet,CCity,CState,CActive};
-            //Cursor routeReader = save.query(TableName, Collumns, null, null,
-             //       null, null, CPosition + " ASC");
             Cursor routeReader = save.rawQuery("SELECT * from "+TableName + " ORDER BY "+ CPosition,null);
             //store collumn numbers for access in loop
             int Name = routeReader.getColumnIndex(CName), Street = routeReader.getColumnIndex(CStreet),
@@ -74,8 +70,7 @@ public class Route{
                 if (!_Route.contains(stop))//prevent collision
                     _Route.add(stop);
             }
-        }else
-            Log.e("Route","Load while DB not ready");
+        }
     }//end load route from sqlite
     public void Save()
     {
@@ -98,10 +93,9 @@ public class Route{
                 values.put(CActive,stop.getActive());
                 values.put(CPosition,position);//index isn't stored in the Address object
                 save.insert(TableName,null,values);
-                Log.d("Route:save", "Insert "+stop.getName() +", "+position+"/"+_Route.size());
+
             }//end loop
-        }else
-            Log.e("Route","Save while DB not ready");
+        }
     }//end save
 
 
@@ -143,8 +137,6 @@ public class Route{
     }//end move up
     public boolean moveDown(int index)
     {
-
-        Log.d("Route","Movedown at "+index);
         //swaps the address with the one after it
         if (index >= 0 && index< _Route.size()-1 )//boundry checking
         {
