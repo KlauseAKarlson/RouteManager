@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -72,10 +73,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(toEdit);//data transfer is handled by the Route singleton class
         }else if (view==BStart)
         {
-            Intent toNavigate=new Intent(this, NavigationActivity.class );
-            startActivity(toNavigate);
-        }
-    }
+            //boundry check, this activity requries at least one active stop
+            if(_Route.readyToNavigate()) {
+                Intent toNavigate = new Intent(this, NavigationActivity.class);
+                startActivity(toNavigate);
+            }else{
+                //tell the user why they aren't gettign the naivgation page
+                Toast errorMessage=Toast.makeText(
+                        this,
+                        "No active stops",
+                        Toast.LENGTH_LONG
+                );
+                errorMessage.show();
+            }
+        }//end BSTart
+    }//end onclick
 
     public class StopSelectionAdapter extends RecyclerView.Adapter<StopSelectionAdapter.StopSelector>
     {

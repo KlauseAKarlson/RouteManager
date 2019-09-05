@@ -147,6 +147,19 @@ public class Route{
             return false;
     }
 
+    public boolean readyToNavigate()
+    {
+        //returns true if there is at least one active address in order to create a navigator
+        //perform a linear seachr
+        for (Address a: _Route)
+        {
+            if(a.getActive())
+                return true;//return statement will end the search early
+            //else check next address
+        }
+
+        return false;
+    }
     public Navigator getNavigator()
     {
         return new Navigator();

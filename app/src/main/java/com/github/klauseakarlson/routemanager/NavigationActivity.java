@@ -65,7 +65,7 @@ public class NavigationActivity extends AppCompatActivity{
             public void onClick(View view) {
                 //launch google maps app using an intent
                 /**
-                 * Accoring to the Google maps documentation
+                 * Acoring to the Google maps documentation
                  * https://developers.google.com/maps/documentation/urls/android-intents
                  * The package should be "com.google.android.apps.maps"
                  * and the action should be Intent.ACTION_VIEW
@@ -103,7 +103,7 @@ public class NavigationActivity extends AppCompatActivity{
                 stop.getStreet()+"\n"+
                 stop.getCity()+", "+stop.getState();
         LAddress.setText(destination);
-
+        //text resizes to fill screen
         TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(LAddress,12,
                 48,4, TypedValue.COMPLEX_UNIT_DIP);
     }
@@ -114,11 +114,12 @@ public class NavigationActivity extends AppCompatActivity{
         //https://developers.google.com/maps/documentation/urls/guide
         //we want directions
         String Url="https://www.google.com/maps/dir/?api=1";//base URL
-        //paramaters are on seperate liens for clearity and eas of editing
+        //paramaters are on seperate lines for clarity and ease of editing
+        //create address string
         String rawAddress=destination.getStreet()+", "+destination.getCity()+", "+destination.getState();
-        Url+= "&destination=" + Uri.encode(rawAddress);//clean out spaces
+        Url+= "&destination=" + Uri.encode(rawAddress);//this makes the string URL safe
         Url+= "&travelmode=driving";//users are expected to be driving a bus
-        Url+= "dir_action=navigate";
+        Url+= "dir_action=navigate";//we want navigation directions
         return Url;
     }
 }//end navigation activity
